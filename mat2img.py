@@ -12,7 +12,7 @@ def mat2img(mat_path):
     return sio.loadmat(mat_path)['groundtruth']
 
 def img_save(img, save_path):
-    flags = [cv2.IMWRITE_JPEG_QUALITY, 100]
+    flags = [cv2.IMWRITE_PNG_COMPRESSION, 0]
     cv2.imwrite(save_path, img, flags)
 
 if __name__ == '__main__':
@@ -24,5 +24,5 @@ if __name__ == '__main__':
     for ll in label_list:
         lab = mat2img(ll).astype('uint8')
         print(np.max(lab))
-        fname = ll.split('/')[-1].replace('.mat', '.jpg')
+        fname = ll.split('/')[-1].replace('.mat', '.png')
         img_save(lab, os.path.join(save_path, fname))
